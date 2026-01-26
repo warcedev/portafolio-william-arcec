@@ -10,7 +10,7 @@ const CVModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const handleEnglishCV = () => {
-    window.open('/WilliamArceCV-EN.pdf', '_blank');
+    window.open('/WilliamArceCV-EN .pdf', '_blank');
     onClose();
   };
 
