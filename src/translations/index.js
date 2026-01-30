@@ -6,7 +6,7 @@ export const translations = {
     servicios: 'Servicios',
     proyectos: 'Proyectos',
     contacto: 'Contacto',
-    descargarCV: 'Descargar CV',
+    descargarCV: 'Mas acerca de mi',
     
     // Home Page
     heroTitle1: 'Transformamos',
@@ -118,7 +118,7 @@ export const translations = {
     derechosReservados: 'Todos los derechos reservados.',
     
     // CV Modal
-    seleccionarCV: '📄 Seleccionar CV',
+    seleccionarCV: '📄 Te inivito a ver mi CV!',
     seleccionarDesc: 'Elige en qué idioma deseas descargar mi currículum',
     cvEspanol: '🇪🇸 CV en Español',
     cvIngles: '🇺🇸 CV en Inglés',
@@ -131,7 +131,7 @@ export const translations = {
     servicios: 'Services',
     proyectos: 'Projects',
     contacto: 'Contact',
-    descargarCV: 'Download CV',
+    descargarCV: 'More about me',
     
     // Home Page
     heroTitle1: 'We Transform',
@@ -243,7 +243,7 @@ export const translations = {
     derechosReservados: 'All rights reserved.',
     
     // CV Modal
-    seleccionarCV: '📄 Select CV',
+    seleccionarCV: '📄 I invite you to view my CV!',
     seleccionarDesc: 'Choose in which language you want to download my resume',
     cvEspanol: '🇪🇸 CV in Spanish',
     cvIngles: '🇺🇸 CV in English',

@@ -637,13 +637,13 @@ const Home = () => {
               {language === 'es' ? 'Contacto' : 'Contact'}
             </h4>
             <p style={{ color: '#cbd5e1', marginBottom: '10px' }}>
-              ✉️ contacto@codebywill.com
+              ✉️ william.arcedev@gmail.com
             </p>
             <p style={{ color: '#cbd5e1', marginBottom: '10px' }}>
-              📞 +51 123 456 789
+              📞 +595 982 375 298
             </p>
             <p style={{ color: '#cbd5e1' }}>
-              📍 {language === 'es' ? 'Lima, Perú' : 'Lima, Peru'}
+              📍 {language === 'es' ? 'Luque, Paraguay' : 'Luque, Paraguay'}
             </p>
           </div>
         </div>

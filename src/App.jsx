@@ -30,7 +30,7 @@ function App() {
 
 // Componente del botón de WhatsApp
 const WhatsAppButton = () => {
-  const whatsappNumber = '+1234567890'; // Cambia esto
+  const whatsappNumber = '+595982375298'; // Cambia esto
 
   const handleClick = () => {
     window.open(`https://api.whatsapp.com/send/?phone=595982375298&text&type=phone_number&app_absent=0`, '_blank');
