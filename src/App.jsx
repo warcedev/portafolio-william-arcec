@@ -6,32 +6,14 @@ import Home from './pages/Home';
 import ServicesPage from './pages/ServicesPage';
 import ProjectsPage from './components/ProjectsPage';
 import ContactPage from './pages/ContactPage';
+import TechnologiesPage from './pages/TechnologiesPage';
+import ProcessPage from './pages/ProcessPage';
+import AboutPage from './pages/AboutPage';
 import Header from './components/layout/Header';
 import React from 'react';
 
-function App() {
-  return (
-    <LanguageProvider>
-      <Router>
-        <div style={{ minHeight: '100vh' }}>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/servicios" element={<ServicesPage />} />
-            <Route path="/proyectos" element={<ProjectsPage />} />
-            <Route path="/contacto" element={<ContactPage />} />
-          </Routes>
-          <WhatsAppButton />
-        </div>
-      </Router>
-    </LanguageProvider>
-  );
-}
-
-// Componente del botón de WhatsApp
+// Mueve WhatsAppButton aquí y elimínalo del final
 const WhatsAppButton = () => {
-  const whatsappNumber = '+595982375298'; // Cambia esto
-
   const handleClick = () => {
     window.open(`https://api.whatsapp.com/send/?phone=595982375298&text&type=phone_number&app_absent=0`, '_blank');
   };
@@ -71,5 +53,27 @@ const WhatsAppButton = () => {
     </button>
   );
 };
+
+function App() {
+  return (
+    <LanguageProvider>
+      <Router>
+        <div style={{ minHeight: '100vh' }}>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/servicios" element={<ServicesPage />} />
+            <Route path="/proyectos" element={<ProjectsPage />} />
+            <Route path="/contacto" element={<ContactPage />} />
+            <Route path="/tecnologias" element={<TechnologiesPage />} />
+            <Route path="/proceso" element={<ProcessPage />} />
+            <Route path="/nosotros" element={<AboutPage />} />
+          </Routes>
+          <WhatsAppButton />
+        </div>
+      </Router>
+    </LanguageProvider>
+  );
+}
 
 export default App;
