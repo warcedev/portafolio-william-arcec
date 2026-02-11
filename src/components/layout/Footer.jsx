@@ -14,8 +14,8 @@ const Footer = () => {
             quickLinks: 'Enlaces rápidos',
             contact: 'Contacto',
             rights: `© ${currentYear} CodeByWill. Todos los derechos reservados.`,
-            email: 'contacto@codebywill.com',
-            phone: '+595 982 375 298'
+            email: 'william.arcedev@gmail.com',
+            phone: '+595 994 847788'
         },
         en: {
             description: 'CodeByWill - Transforming ideas into digital solutions since 2024.',
@@ -60,13 +60,13 @@ const Footer = () => {
                     <h3 className="footer-heading">{content.contact}</h3>
                     <ul className="contact-list">
                         <li>
-                            <a href="mailto:contacto@codebywill.com" className="contact-link">
-                                ✉️ {content.email}
+                            <a href="mailto:william.arcedev@gmail.com" className="contact-link">
+                                 {content.email}
                             </a>
                         </li>
                         <li>
-                            <a href="https://wa.me/595982375298" className="contact-link">
-                                📱 {content.phone}
+                            <a href="https://wa.me/595994847788" className="contact-link">
+                                 {content.phone}
                             </a>
                         </li>
                     </ul>
@@ -77,9 +77,9 @@ const Footer = () => {
             <div className="footer-bottom">
                 <p>{content.rights}</p>
                 <div className="social-links">
-                    <a href="#" className="social-link">LinkedIn</a>
-                    <a href="#" className="social-link">GitHub</a>
-                    <a href="#" className="social-link">Instagram</a>
+                    <a href="https://www.linkedin.com/in/willarce/" className="social-link">LinkedIn</a>
+                    {/*<a href="#" className="social-link">GitHub</a>*/}
+                    <a href="https://www.instagram.com/codebywillpy/" className="social-link">Instagram</a>
                 </div>
             </div>
         </footer>

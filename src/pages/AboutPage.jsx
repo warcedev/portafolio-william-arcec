@@ -14,7 +14,7 @@ const AboutPage = () => {
             sectionTitle: 'Nuestra Historia',
             historyContent: [
                 "Fundada en 2024, CodeByWill nació de la pasión por crear soluciones digitales innovadoras. A pesar de ser una empresa joven, nuestro equipo cuenta con años de experiencia individual en el sector tecnológico.",
-                "Comenzamos como un pequeño grupo de desarrolladores freelance que compartían la visión de ofrecer calidad y profesionalismo en cada proyecto. Hoy, hemos crecido hasta convertirnos en un referente en desarrollo web en la región.",
+                "Comenzamos como un pequeño grupo de desarrolladores freelance que compartían la visión de ofrecer calidad y profesionalismo en cada proyecto.",
                 "Nuestra juventud es nuestra fortaleza: nos permite ser ágiles, adaptarnos rápidamente a nuevas tecnologías y mantener una mentalidad fresca e innovadora."
             ],
             whyChooseTitle: '¿Por qué elegirnos?',
@@ -85,8 +85,8 @@ const AboutPage = () => {
             statsTitle: 'En Números',
             stats: [
                 { number: '2+', label: 'Años en el mercado', icon: '📈' },
-                { number: '50+', label: 'Proyectos completados', icon: '🚀' },
-                { number: '25+', label: 'Clientes satisfechos', icon: '😊' },
+                // { number: '50+', label: 'Proyectos completados', icon: '🚀' },
+                // { number: '25+', label: 'Clientes satisfechos', icon: '😊' },
                 { number: '100%', label: 'Tasa de satisfacción', icon: '⭐' },
                 { number: '15+', label: 'Tecnologías dominadas', icon: '💻' },
                 { number: '24/7', label: 'Soporte disponible', icon: '🛡️' }
@@ -172,7 +172,7 @@ const AboutPage = () => {
             statsTitle: 'By the Numbers',
             stats: [
                 { number: '2+', label: 'Years in the market', icon: '📈' },
-                { number: '50+', label: 'Projects completed', icon: '🚀' },
+                // { number: '50+', label: 'Projects completed', icon: '🚀' },
                 { number: '25+', label: 'Satisfied clients', icon: '😊' },
                 { number: '100%', label: 'Satisfaction rate', icon: '⭐' },
                 { number: '15+', label: 'Technologies mastered', icon: '💻' },

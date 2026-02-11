@@ -15,15 +15,15 @@ const WhatsAppButton = () => {
         window.open(`https://api.whatsapp.com/send/?phone=595982375298&text&type=phone_number&app_absent=0`, '_blank');
     };
 
-    return (
-        <button
-            onClick={handleClick}
-            className="whatsapp-button"
-            aria-label="Contactar por WhatsApp"
-        >
-            💬
-        </button>
-    );
+    // return (
+    //     <button
+    //         onClick={handleClick}
+    //         className="whatsapp-button"
+    //         aria-label="Contactar por WhatsApp"
+    //     >
+    //         💬
+    //     </button>
+    // );
 };
 
 function App() {

@@ -42,9 +42,9 @@ const ContactPage = () => {
             submittingButton: 'Enviando...',
             contactInfoTitle: 'Información de contacto',
             emailTitle: 'Correo electrónico',
-            email: 'contacto@codebywill.com',
+            email: 'william.arcedev@gmail.com',
             phoneTitle: 'Teléfono / WhatsApp',
-            phone: '+595 982 375 298',
+            phone: '+595 994 847788',
             locationTitle: 'Ubicación',
             location: 'Asunción, Paraguay',
             hoursTitle: 'Horario de atención',
@@ -77,7 +77,7 @@ const ContactPage = () => {
                 },
                 {
                     question: '¿Trabajan con empresas internacionales?',
-                    answer: 'Sí, trabajamos con clientes en toda Latinoamérica y tenemos experiencia en proyectos internacionales.'
+                    answer: 'Sí, trabajamos con clientes en toda America y tenemos experiencia en proyectos internacionales.'
                 },
                 {
                     question: '¿Cuál es el tiempo de respuesta?',
@@ -122,7 +122,7 @@ const ContactPage = () => {
             submittingButton: 'Sending...',
             contactInfoTitle: 'Contact information',
             emailTitle: 'Email',
-            email: 'contact@codebywill.com',
+            email: 'william.arcedev@gmail.com',
             phoneTitle: 'Phone / WhatsApp',
             phone: '+595 982 375 298',
             locationTitle: 'Location',
@@ -405,7 +405,7 @@ const ContactPage = () => {
                                     <div className="method-icon">✉️</div>
                                     <div className="method-content">
                                         <h4>{t.emailTitle}</h4>
-                                        <a href="mailto:contacto@codebywill.com" className="method-link">
+                                        <a href="mailto:william.arcedev@gmail.com" className="method-link">
                                             {t.email}
                                         </a>
                                     </div>
@@ -415,7 +415,7 @@ const ContactPage = () => {
                                     <div className="method-icon">📱</div>
                                     <div className="method-content">
                                         <h4>{t.phoneTitle}</h4>
-                                        <a href="https://wa.me/595982375298" className="method-link">
+                                        <a href="https://wa.me/595994847788" className="method-link">
                                             {t.phone}
                                         </a>
                                     </div>
@@ -478,7 +478,7 @@ const ContactPage = () => {
                         <div className="map-content">
                             <div className="map-icon">📍</div>
                             <h3>Estamos en Paraguay</h3>
-                            <p>Servimos clientes en toda Latinoamérica de manera remota</p>
+                            <p>Servimos clientes en toda America de manera remota</p>
                         </div>
                     </div>
                 </div>
