@@ -1,831 +1,490 @@
 // src/pages/ContactPage.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { translations } from '../translations';
-import { motion } from 'framer-motion';
-import { FaEnvelope, FaPhone, FaWhatsapp, FaLinkedin, FaMapMarkerAlt, FaGithub, FaPaperPlane, FaUser, FaComment } from 'react-icons/fa';
+import './ContactPage.css';
 
 const ContactPage = () => {
-  const { language } = useLanguage();
-  const t = translations[language];
+    const { language } = useLanguage();
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        projectType: '',
+        message: ''
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState(null);
 
-  const contactInfo = {
-    email: 'william.arcedev@gmail.com',
-    phone: '+595982375298',
-    whatsapp: '+595982375298',
-    linkedin: 'https://www.linkedin.com/in/willarce/',
-    github: 'https://github.com/warcedev',
-    address: language === 'es' ? 'Luque, Paraguay' : 'Luque, Paraguay'
-  };
+    const content = {
+        es: {
+            heroTitle: 'Contáctanos',
+            heroSubtitle: 'Hablemos sobre tu proyecto. Estamos listos para convertir tus ideas en realidad.',
+            formTitle: 'Envíanos un mensaje',
+            nameLabel: 'Nombre completo *',
+            emailLabel: 'Correo electrónico *',
+            phoneLabel: 'Teléfono',
+            companyLabel: 'Empresa / Organización',
+            projectTypeLabel: 'Tipo de proyecto *',
+            projectTypeOptions: [
+                'Selecciona una opción',
+                'Sitio web corporativo',
+                'E-commerce / Tienda online',
+                'Aplicación web',
+                'Aplicación móvil',
+                'Sistema administrativo',
+                'Consultoría técnica',
+                'Mantenimiento web',
+                'Otro'
+            ],
+            messageLabel: 'Cuéntanos sobre tu proyecto *',
+            submitButton: 'Enviar mensaje',
+            submittingButton: 'Enviando...',
+            contactInfoTitle: 'Información de contacto',
+            emailTitle: 'Correo electrónico',
+            email: 'contacto@codebywill.com',
+            phoneTitle: 'Teléfono / WhatsApp',
+            phone: '+595 982 375 298',
+            locationTitle: 'Ubicación',
+            location: 'Asunción, Paraguay',
+            hoursTitle: 'Horario de atención',
+            hours: 'Lunes a Viernes: 9:00 - 18:00',
+            responseTime: 'Respondemos en menos de 24 horas',
+            whyContactTitle: '¿Por qué contactarnos?',
+            whyContactPoints: [
+                {
+                    title: 'Consulta gratuita',
+                    description: 'Primera reunión sin costo para entender tus necesidades'
+                },
+                {
+                    title: 'Presupuesto detallado',
+                    description: 'Transparencia total en costos y tiempos'
+                },
+                {
+                    title: 'Soporte personalizado',
+                    description: 'Atención dedicada desde el primer contacto'
+                },
+                {
+                    title: 'Sin compromiso',
+                    description: 'Evaluación inicial sin obligación de contratar'
+                }
+            ],
+            faqTitle: 'Preguntas antes de contactar',
+            faqs: [
+                {
+                    question: '¿Cuál es el proceso después de contactarlos?',
+                    answer: '1) Reunión inicial gratuita, 2) Propuesta detallada, 3) Planificación del proyecto, 4) Desarrollo, 5) Entrega y soporte.'
+                },
+                {
+                    question: '¿Trabajan con empresas internacionales?',
+                    answer: 'Sí, trabajamos con clientes en toda Latinoamérica y tenemos experiencia en proyectos internacionales.'
+                },
+                {
+                    question: '¿Cuál es el tiempo de respuesta?',
+                    answer: 'Respondemos todos los mensajes en menos de 24 horas hábiles.'
+                },
+                {
+                    question: '¿Ofrecen mantenimiento después del proyecto?',
+                    answer: 'Sí, ofrecemos planes de mantenimiento mensual, trimestral y anual según tus necesidades.'
+                }
+            ],
+            successMessage: '¡Mensaje enviado! Te contactaremos en menos de 24 horas.',
+            errorMessage: 'Error al enviar. Por favor, inténtalo de nuevo.',
+            validationErrors: {
+                name: 'El nombre es requerido',
+                email: 'Email inválido',
+                projectType: 'Selecciona un tipo de proyecto',
+                message: 'El mensaje es requerido'
+            }
+        },
+        en: {
+            heroTitle: 'Contact Us',
+            heroSubtitle: "Let's talk about your project. We're ready to turn your ideas into reality.",
+            formTitle: 'Send us a message',
+            nameLabel: 'Full name *',
+            emailLabel: 'Email *',
+            phoneLabel: 'Phone',
+            companyLabel: 'Company / Organization',
+            projectTypeLabel: 'Project type *',
+            projectTypeOptions: [
+                'Select an option',
+                'Corporate website',
+                'E-commerce / Online store',
+                'Web application',
+                'Mobile application',
+                'Administrative system',
+                'Technical consulting',
+                'Web maintenance',
+                'Other'
+            ],
+            messageLabel: 'Tell us about your project *',
+            submitButton: 'Send message',
+            submittingButton: 'Sending...',
+            contactInfoTitle: 'Contact information',
+            emailTitle: 'Email',
+            email: 'contact@codebywill.com',
+            phoneTitle: 'Phone / WhatsApp',
+            phone: '+595 982 375 298',
+            locationTitle: 'Location',
+            location: 'Asunción, Paraguay',
+            hoursTitle: 'Business hours',
+            hours: 'Monday to Friday: 9:00 - 18:00',
+            responseTime: 'We respond in less than 24 hours',
+            whyContactTitle: 'Why contact us?',
+            whyContactPoints: [
+                {
+                    title: 'Free consultation',
+                    description: 'First meeting at no cost to understand your needs'
+                },
+                {
+                    title: 'Detailed budget',
+                    description: 'Total transparency in costs and timelines'
+                },
+                {
+                    title: 'Personalized support',
+                    description: 'Dedicated attention from the first contact'
+                },
+                {
+                    title: 'No commitment',
+                    description: 'Initial evaluation without obligation to hire'
+                }
+            ],
+            faqTitle: 'Questions before contacting',
+            faqs: [
+                {
+                    question: 'What is the process after contacting you?',
+                    answer: '1) Free initial meeting, 2) Detailed proposal, 3) Project planning, 4) Development, 5) Delivery and support.'
+                },
+                {
+                    question: 'Do you work with international companies?',
+                    answer: 'Yes, we work with clients throughout Latin America and have experience in international projects.'
+                },
+                {
+                    question: 'What is the response time?',
+                    answer: 'We respond to all messages in less than 24 business hours.'
+                },
+                {
+                    question: 'Do you offer maintenance after the project?',
+                    answer: 'Yes, we offer monthly, quarterly, and annual maintenance plans according to your needs.'
+                }
+            ],
+            successMessage: 'Message sent! We will contact you in less than 24 hours.',
+            errorMessage: 'Error sending. Please try again.',
+            validationErrors: {
+                name: 'Name is required',
+                email: 'Invalid email',
+                projectType: 'Select a project type',
+                message: 'Message is required'
+            }
+        }
+    };
 
-  const handleEmailClick = () => {
-    window.location.href = `mailto:${contactInfo.email}`;
-  };
+    const t = content[language];
+    const [errors, setErrors] = useState({});
 
-  const handleCallClick = () => {
-    window.location.href = `tel:${contactInfo.phone}`;
-  };
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+        // Clear error when user starts typing
+        if (errors[name]) {
+            setErrors(prev => ({
+                ...prev,
+                [name]: ''
+            }));
+        }
+    };
 
-  const handleWhatsAppClick = () => {
-    window.open(`https://wa.me/${contactInfo.whatsapp.replace('+', '')}`, '_blank');
-  };
+    const validateForm = () => {
+        const newErrors = {};
 
-  const handleLinkedInClick = () => {
-    window.open(contactInfo.linkedin, '_blank');
-  };
+        if (!formData.name.trim()) {
+            newErrors.name = t.validationErrors.name;
+        }
 
-  const handleGithubClick = () => {
-    window.open(contactInfo.github, '_blank');
-  };
+        if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.email = t.validationErrors.email;
+        }
 
-  // Animaciones
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  };
+        if (!formData.projectType || formData.projectType === t.projectTypeOptions[0]) {
+            newErrors.projectType = t.validationErrors.projectType;
+        }
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12
-      }
-    }
-  };
+        if (!formData.message.trim()) {
+            newErrors.message = t.validationErrors.message;
+        }
 
-  const cardHoverVariants = {
-    initial: { y: 0 },
-    hover: { 
-      y: -10,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 15
-      }
-    }
-  };
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
-  const iconHoverVariants = {
-    initial: { scale: 1 },
-    hover: { 
-      scale: 1.1,
-      rotate: [0, -10, 10, -10, 0],
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-  const buttonHoverVariants = {
-    initial: { scale: 1 },
-    hover: { 
-      scale: 1.05,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10
-      }
-    },
-    tap: { scale: 0.95 }
-  };
+        if (!validateForm()) {
+            return;
+        }
 
-  const formInputVariants = {
-    focus: {
-      scale: 1.02,
-      boxShadow: "0 0 0 3px rgba(37, 99, 235, 0.1)",
-      transition: { duration: 0.2 }
-    }
-  };
+        setIsSubmitting(true);
+        setSubmitStatus(null);
 
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      style={{
-        minHeight: '100vh',
-        background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
-        paddingTop: '80px'
-      }}
-    >
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '40px 20px'
-      }}>
-        {/* Header */}
-        <motion.div
-          initial={{ y: -30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, type: "spring" }}
-          style={{ textAlign: 'center', marginBottom: '80px' }}
-        >
-          <motion.h1
-            style={{
-              fontSize: '3.5rem',
-              fontWeight: 'bold',
-              color: '#1e293b',
-              marginBottom: '20px',
-              background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
-            }}
-            animate={{
-              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            style={{ backgroundSize: '200% auto' }}
-          >
-            {t.contactame}
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            style={{
-              fontSize: '1.25rem',
-              color: '#64748b',
-              maxWidth: '800px',
-              margin: '0 auto',
-              lineHeight: '1.6'
-            }}
-          >
-            {t.contactoDesc}
-          </motion.p>
-          
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: '100px' }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            style={{
-              height: '4px',
-              background: 'linear-gradient(90deg, #2563eb, #7c3aed)',
-              margin: '30px auto',
-              borderRadius: '2px'
-            }}
-          />
-        </motion.div>
+        try {
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 1500));
 
-        {/* Contact Cards */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '40px',
-            justifyContent: 'center'
-          }}
-        >
-          {/* Contact Info Card */}
-          <motion.div
-            variants={itemVariants}
-            whileHover="hover"
-            initial="initial"
-            variants={cardHoverVariants}
-            style={{
-              background: 'white',
-              padding: '40px',
-              borderRadius: '20px',
-              boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
-              width: '100%',
-              maxWidth: '500px',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-          >
-            {/* Background decoration */}
-            <motion.div
-              initial={{ rotate: 0 }}
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              style={{
-                position: 'absolute',
-                top: '-50%',
-                right: '-50%',
-                width: '200%',
-                height: '200%',
-                background: 'linear-gradient(45deg, transparent 30%, rgba(37, 99, 235, 0.05) 50%, transparent 70%)',
-              }}
-            />
-            
-            <h2 style={{
-              fontSize: '2rem',
-              fontWeight: 'bold',
-              color: '#1e293b',
-              marginBottom: '40px',
-              position: 'relative'
-            }}>
-              {t.informacionContacto}
-            </h2>
+            // Here you would typically send data to your backend
+            console.log('Form submitted:', formData);
 
-            {/* Email */}
-            <motion.div
-              variants={itemVariants}
-              whileHover="hover"
-              initial="initial"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '20px',
-                marginBottom: '25px',
-                padding: '20px',
-                background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(37, 99, 235, 0.02) 100%)',
-                borderRadius: '15px',
-                cursor: 'pointer',
-                position: 'relative',
-                overflow: 'hidden'
-              }}
-              onClick={handleEmailClick}
-              whileTap={{ scale: 0.98 }}
-            >
-              <motion.div
-                variants={iconHoverVariants}
-                style={{
-                  width: '60px',
-                  height: '60px',
-                  background: 'linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)',
-                  borderRadius: '15px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  fontSize: '1.5rem',
-                  flexShrink: 0
-                }}
-              >
-                <FaEnvelope />
-              </motion.div>
-              <div style={{ flex: 1 }}>
-                <h3 style={{ color: '#475569', marginBottom: '5px', fontSize: '0.9rem', fontWeight: '600' }}>
-                  {t.email}
-                </h3>
-                <p style={{ color: '#2563eb', fontWeight: '600', fontSize: '1.1rem' }}>
-                  {contactInfo.email}
-                </p>
-              </div>
-              <motion.div
-                initial={{ x: -20, opacity: 0 }}
-                whileHover={{ x: 0, opacity: 1 }}
-                style={{
-                  color: '#2563eb',
-                  fontSize: '1.2rem'
-                }}
-              >
-                →
-              </motion.div>
-            </motion.div>
+            setSubmitStatus('success');
 
-            {/* Teléfono */}
-            <motion.div
-              variants={itemVariants}
-              whileHover="hover"
-              initial="initial"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '20px',
-                marginBottom: '25px',
-                padding: '20px',
-                background: 'linear-gradient(135deg, rgba(5, 150, 105, 0.05) 0%, rgba(5, 150, 105, 0.02) 100%)',
-                borderRadius: '15px',
-                cursor: 'pointer',
-                position: 'relative'
-              }}
-              onClick={handleCallClick}
-              whileTap={{ scale: 0.98 }}
-            >
-              <motion.div
-                variants={iconHoverVariants}
-                style={{
-                  width: '60px',
-                  height: '60px',
-                  background: 'linear-gradient(135deg, #059669 0%, #10b981 100%)',
-                  borderRadius: '15px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  fontSize: '1.5rem',
-                  flexShrink: 0
-                }}
-              >
-                <FaPhone />
-              </motion.div>
-              <div style={{ flex: 1 }}>
-                <h3 style={{ color: '#475569', marginBottom: '5px', fontSize: '0.9rem', fontWeight: '600' }}>
-                  {t.telefono}
-                </h3>
-                <p style={{ color: '#059669', fontWeight: '600', fontSize: '1.1rem' }}>
-                  {contactInfo.phone}
-                </p>
-              </div>
-              <motion.div
-                initial={{ x: -20, opacity: 0 }}
-                whileHover={{ x: 0, opacity: 1 }}
-                style={{
-                  color: '#059669',
-                  fontSize: '1.2rem'
-                }}
-              >
-                →
-              </motion.div>
-            </motion.div>
+            // Reset form
+            setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                company: '',
+                projectType: '',
+                message: ''
+            });
 
-            {/* WhatsApp */}
-            <motion.div
-              variants={itemVariants}
-              whileHover="hover"
-              initial="initial"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '20px',
-                marginBottom: '25px',
-                padding: '20px',
-                background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.05) 0%, rgba(37, 211, 102, 0.02) 100%)',
-                borderRadius: '15px',
-                cursor: 'pointer',
-                position: 'relative'
-              }}
-              onClick={handleWhatsAppClick}
-              whileTap={{ scale: 0.98 }}
-            >
-              <motion.div
-                variants={iconHoverVariants}
-                style={{
-                  width: '60px',
-                  height: '60px',
-                  background: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
-                  borderRadius: '15px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  fontSize: '1.5rem',
-                  flexShrink: 0
-                }}
-              >
-                <FaWhatsapp />
-              </motion.div>
-              <div style={{ flex: 1 }}>
-                <h3 style={{ color: '#475569', marginBottom: '5px', fontSize: '0.9rem', fontWeight: '600' }}>
-                  {t.whatsapp}
-                </h3>
-                <p style={{ color: '#25D366', fontWeight: '600', fontSize: '1.1rem' }}>
-                  {contactInfo.whatsapp}
-                </p>
-              </div>
-              <motion.div
-                initial={{ x: -20, opacity: 0 }}
-                whileHover={{ x: 0, opacity: 1 }}
-                style={{
-                  color: '#25D366',
-                  fontSize: '1.2rem'
-                }}
-              >
-                →
-              </motion.div>
-            </motion.div>
+            // Reset status after 5 seconds
+            setTimeout(() => {
+                setSubmitStatus(null);
+            }, 5000);
 
-            {/* LinkedIn */}
-            <motion.div
-              variants={itemVariants}
-              whileHover="hover"
-              initial="initial"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '20px',
-                marginBottom: '25px',
-                padding: '20px',
-                background: 'linear-gradient(135deg, rgba(0, 119, 181, 0.05) 0%, rgba(0, 119, 181, 0.02) 100%)',
-                borderRadius: '15px',
-                cursor: 'pointer',
-                position: 'relative'
-              }}
-              onClick={handleLinkedInClick}
-              whileTap={{ scale: 0.98 }}
-            >
-              <motion.div
-                variants={iconHoverVariants}
-                style={{
-                  width: '60px',
-                  height: '60px',
-                  background: 'linear-gradient(135deg, #0077B5 0%, #0A66C2 100%)',
-                  borderRadius: '15px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  fontSize: '1.5rem',
-                  flexShrink: 0
-                }}
-              >
-                <FaLinkedin />
-              </motion.div>
-              <div style={{ flex: 1 }}>
-                <h3 style={{ color: '#475569', marginBottom: '5px', fontSize: '0.9rem', fontWeight: '600' }}>
-                  {t.linkedin}
-                </h3>
-                <p style={{ color: '#0077B5', fontWeight: '600', fontSize: '1.1rem' }}>
-                  {t.verPerfil}
-                </p>
-              </div>
-              <motion.div
-                initial={{ x: -20, opacity: 0 }}
-                whileHover={{ x: 0, opacity: 1 }}
-                style={{
-                  color: '#0077B5',
-                  fontSize: '1.2rem'
-                }}
-              >
-                →
-              </motion.div>
-            </motion.div>
+        } catch (error) {
+            setSubmitStatus('error');
+            console.error('Error submitting form:', error);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
-            {/* GitHub */}
-            <motion.div
-              variants={itemVariants}
-              whileHover="hover"
-              initial="initial"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '20px',
-                marginBottom: '25px',
-                padding: '20px',
-                background: 'linear-gradient(135deg, rgba(24, 24, 27, 0.05) 0%, rgba(24, 24, 27, 0.02) 100%)',
-                borderRadius: '15px',
-                cursor: 'pointer',
-                position: 'relative'
-              }}
-              onClick={handleGithubClick}
-              whileTap={{ scale: 0.98 }}
-            >
-              <motion.div
-                variants={iconHoverVariants}
-                style={{
-                  width: '60px',
-                  height: '60px',
-                  background: 'linear-gradient(135deg, #18181b 0%, #3f3f46 100%)',
-                  borderRadius: '15px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  fontSize: '1.5rem',
-                  flexShrink: 0
-                }}
-              >
-                <FaGithub />
-              </motion.div>
-              <div style={{ flex: 1 }}>
-                <h3 style={{ color: '#475569', marginBottom: '5px', fontSize: '0.9rem', fontWeight: '600' }}>
-                  GitHub
-                </h3>
-                <p style={{ color: '#18181b', fontWeight: '600', fontSize: '1.1rem' }}>
-                  warcedev
-                </p>
-              </div>
-              <motion.div
-                initial={{ x: -20, opacity: 0 }}
-                whileHover={{ x: 0, opacity: 1 }}
-                style={{
-                  color: '#18181b',
-                  fontSize: '1.2rem'
-                }}
-              >
-                →
-              </motion.div>
-            </motion.div>
+    return (
+        <div className="contact-page">
+            {/* Hero Section */}
+            <section className="contact-hero">
+                <div className="contact-hero-content">
+                    <h1 className="contact-hero-title">{t.heroTitle}</h1>
+                    <p className="contact-hero-subtitle">{t.heroSubtitle}</p>
+                </div>
+            </section>
 
-            {/* Dirección */}
-            <motion.div
-              variants={itemVariants}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '20px',
-                padding: '20px',
-                background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(124, 58, 237, 0.02) 100%)',
-                borderRadius: '15px'
-              }}
-            >
-              <motion.div
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.5 }}
-                style={{
-                  width: '60px',
-                  height: '60px',
-                  background: 'linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%)',
-                  borderRadius: '15px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  fontSize: '1.5rem',
-                  flexShrink: 0
-                }}
-              >
-                <FaMapMarkerAlt />
-              </motion.div>
-              <div style={{ flex: 1 }}>
-                <h3 style={{ color: '#475569', marginBottom: '5px', fontSize: '0.9rem', fontWeight: '600' }}>
-                  {t.ubicacion}
-                </h3>
-                <p style={{ color: '#7c3aed', fontWeight: '600', fontSize: '1.1rem' }}>
-                  {contactInfo.address}
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
+            {/* Main Content */}
+            <section className="section">
+                <div className="container">
+                    <div className="contact-content">
+                        {/* Left Column - Form */}
+                        <div className="contact-form-section">
+                            <div className="form-header">
+                                <h2 className="form-title">{t.formTitle}</h2>
+                                <p className="form-subtitle">{t.responseTime}</p>
+                            </div>
 
-          {/* Form Card */}
-          <motion.div
-            variants={itemVariants}
-            whileHover="hover"
-            initial="initial"
-            variants={cardHoverVariants}
-            style={{
-              background: 'white',
-              padding: '40px',
-              borderRadius: '20px',
-              boxShadow: '0 20px 60px rgba(0,0,0,0.08)',
-              width: '100%',
-              maxWidth: '500px',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-          >
-            {/* Animated background */}
-            <motion.div
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-              }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background: 'linear-gradient(45deg, rgba(37, 99, 235, 0.02) 0%, rgba(124, 58, 237, 0.02) 50%, rgba(37, 99, 235, 0.02) 100%)',
-                backgroundSize: '200% 200%',
-                zIndex: 0
-              }}
-            />
-            
-            <h2 style={{
-              fontSize: '2rem',
-              fontWeight: 'bold',
-              color: '#1e293b',
-              marginBottom: '40px',
-              position: 'relative'
-            }}>
-              {t.enviarMensaje}
-            </h2>
-            
-            <form style={{ display: 'flex', flexDirection: 'column', gap: '25px', position: 'relative' }}>
-              <motion.div whileFocus="focus" variants={formInputVariants}>
-                <label style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  color: '#475569',
-                  marginBottom: '8px',
-                  fontWeight: '600',
-                  fontSize: '0.95rem'
-                }}>
-                  <FaUser style={{ color: '#2563eb' }} />
-                  {t.nombre}
-                </label>
-                <motion.input
-                  type="text"
-                  whileFocus={{ 
-                    borderColor: '#2563eb',
-                    boxShadow: '0 0 0 3px rgba(37, 99, 235, 0.1)'
-                  }}
-                  style={{
-                    width: '100%',
-                    padding: '15px 20px',
-                    border: '2px solid #e2e8f0',
-                    borderRadius: '12px',
-                    fontSize: '1rem',
-                    transition: 'all 0.3s ease',
-                    outline: 'none',
-                    background: 'white'
-                  }}
-                  placeholder={t.tuNombre}
-                />
-              </motion.div>
-              
-              <motion.div whileFocus="focus" variants={formInputVariants}>
-                <label style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  color: '#475569',
-                  marginBottom: '8px',
-                  fontWeight: '600',
-                  fontSize: '0.95rem'
-                }}>
-                  <FaEnvelope style={{ color: '#2563eb' }} />
-                  {t.email}
-                </label>
-                <motion.input
-                  type="email"
-                  whileFocus={{ 
-                    borderColor: '#2563eb',
-                    boxShadow: '0 0 0 3px rgba(37, 99, 235, 0.1)'
-                  }}
-                  style={{
-                    width: '100%',
-                    padding: '15px 20px',
-                    border: '2px solid #e2e8f0',
-                    borderRadius: '12px',
-                    fontSize: '1rem',
-                    transition: 'all 0.3s ease',
-                    outline: 'none',
-                    background: 'white'
-                  }}
-                  placeholder={t.tuEmail}
-                />
-              </motion.div>
-              
-              <motion.div whileFocus="focus" variants={formInputVariants}>
-                <label style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  color: '#475569',
-                  marginBottom: '8px',
-                  fontWeight: '600',
-                  fontSize: '0.95rem'
-                }}>
-                  <FaComment style={{ color: '#2563eb' }} />
-                  {t.mensaje}
-                </label>
-                <motion.textarea
-                  rows="5"
-                  whileFocus={{ 
-                    borderColor: '#2563eb',
-                    boxShadow: '0 0 0 3px rgba(37, 99, 235, 0.1)'
-                  }}
-                  style={{
-                    width: '100%',
-                    padding: '15px 20px',
-                    border: '2px solid #e2e8f0',
-                    borderRadius: '12px',
-                    fontSize: '1rem',
-                    resize: 'vertical',
-                    transition: 'all 0.3s ease',
-                    outline: 'none',
-                    background: 'white',
-                    minHeight: '150px'
-                  }}
-                  placeholder={t.mensajePlaceholder}
-                />
-              </motion.div>
-              
-              <motion.button
-                type="button"
-                onClick={handleEmailClick}
-                variants={buttonHoverVariants}
-                whileHover="hover"
-                whileTap="tap"
-                style={{
-                  background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)',
-                  color: 'white',
-                  border: 'none',
-                  padding: '18px 30px',
-                  borderRadius: '12px',
-                  fontSize: '1.1rem',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  marginTop: '10px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '10px',
-                  position: 'relative',
-                  overflow: 'hidden'
-                }}
-              >
-                <motion.span
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatDelay: 1
-                  }}
-                >
-                  <FaPaperPlane />
-                </motion.span>
-                {t.enviarMensajeBtn}
-                <motion.div
-                  initial={{ x: '-100%', y: '-100%' }}
-                  whileHover={{ x: '100%', y: '100%' }}
-                  transition={{ duration: 0.6 }}
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    background: 'linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%)',
-                  }}
-                />
-              </motion.button>
-              
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                style={{
-                  color: '#64748b',
-                  fontSize: '0.9rem',
-                  textAlign: 'center',
-                  marginTop: '10px',
-                  position: 'relative'
-                }}
-              >
-                {t.enviarDesc}
-              </motion.p>
-            </form>
-          </motion.div>
-        </motion.div>
+                            {/* Status Messages */}
+                            {submitStatus === 'success' && (
+                                <div className="success-message">
+                                    <span className="success-icon">✓</span>
+                                    {t.successMessage}
+                                </div>
+                            )}
 
-        {/* Floating Elements */}
-        <motion.div
-          animate={{
-            y: [0, -20, 0],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          style={{
-            position: 'absolute',
-            top: '30%',
-            left: '5%',
-            width: '40px',
-            height: '40px',
-            background: 'linear-gradient(135deg, #2563eb, rgba(37, 99, 235, 0.2))',
-            borderRadius: '50%',
-            opacity: 0.3
-          }}
-        />
-        <motion.div
-          animate={{
-            y: [0, 20, 0],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.5
-          }}
-          style={{
-            position: 'absolute',
-            top: '60%',
-            right: '5%',
-            width: '60px',
-            height: '60px',
-            background: 'linear-gradient(135deg, #7c3aed, rgba(124, 58, 237, 0.2))',
-            borderRadius: '50%',
-            opacity: 0.2
-          }}
-        />
-      </div>
-    </motion.div>
-  );
+                            {submitStatus === 'error' && (
+                                <div className="error-message">
+                                    <span className="error-icon">!</span>
+                                    {t.errorMessage}
+                                </div>
+                            )}
+
+                            <form onSubmit={handleSubmit} className="contact-form">
+                                <div className="form-group">
+                                    <label htmlFor="name">{t.nameLabel}</label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        className={errors.name ? 'error' : ''}
+                                        placeholder="Juan Pérez"
+                                    />
+                                    {errors.name && <span className="error-text">{errors.name}</span>}
+                                </div>
+
+                                <div className="form-row">
+                                    <div className="form-group">
+                                        <label htmlFor="email">{t.emailLabel}</label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            className={errors.email ? 'error' : ''}
+                                            placeholder="juan@empresa.com"
+                                        />
+                                        {errors.email && <span className="error-text">{errors.email}</span>}
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label htmlFor="phone">{t.phoneLabel}</label>
+                                        <input
+                                            type="tel"
+                                            id="phone"
+                                            name="phone"
+                                            value={formData.phone}
+                                            onChange={handleChange}
+                                            placeholder="+595 999 888 777"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="company">{t.companyLabel}</label>
+                                    <input
+                                        type="text"
+                                        id="company"
+                                        name="company"
+                                        value={formData.company}
+                                        onChange={handleChange}
+                                        placeholder="Nombre de tu empresa"
+                                    />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="projectType">{t.projectTypeLabel}</label>
+                                    <select
+                                        id="projectType"
+                                        name="projectType"
+                                        value={formData.projectType}
+                                        onChange={handleChange}
+                                        className={errors.projectType ? 'error' : ''}
+                                    >
+                                        {t.projectTypeOptions.map((option, index) => (
+                                            <option key={index} value={option}>
+                                                {option}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    {errors.projectType && <span className="error-text">{errors.projectType}</span>}
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="message">{t.messageLabel}</label>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        className={errors.message ? 'error' : ''}
+                                        placeholder="Describe tu proyecto, necesidades, timeline, presupuesto aproximado..."
+                                        rows="6"
+                                    />
+                                    {errors.message && <span className="error-text">{errors.message}</span>}
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    className="submit-button"
+                                    disabled={isSubmitting}
+                                >
+                                    {isSubmitting ? t.submittingButton : t.submitButton}
+                                </button>
+                            </form>
+                        </div>
+
+                        {/* Right Column - Info */}
+                        <div className="contact-info-section">
+                            {/* Contact Information */}
+                            <div className="info-card">
+                                <h3 className="info-title">{t.contactInfoTitle}</h3>
+
+                                <div className="contact-method">
+                                    <div className="method-icon">✉️</div>
+                                    <div className="method-content">
+                                        <h4>{t.emailTitle}</h4>
+                                        <a href="mailto:contacto@codebywill.com" className="method-link">
+                                            {t.email}
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div className="contact-method">
+                                    <div className="method-icon">📱</div>
+                                    <div className="method-content">
+                                        <h4>{t.phoneTitle}</h4>
+                                        <a href="https://wa.me/595982375298" className="method-link">
+                                            {t.phone}
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div className="contact-method">
+                                    <div className="method-icon">📍</div>
+                                    <div className="method-content">
+                                        <h4>{t.locationTitle}</h4>
+                                        <p className="method-text">{t.location}</p>
+                                    </div>
+                                </div>
+
+                                <div className="contact-method">
+                                    <div className="method-icon">🕐</div>
+                                    <div className="method-content">
+                                        <h4>{t.hoursTitle}</h4>
+                                        <p className="method-text">{t.hours}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Why Contact Us */}
+                            <div className="info-card">
+                                <h3 className="info-title">{t.whyContactTitle}</h3>
+                                <div className="benefits-list">
+                                    {t.whyContactPoints.map((point, index) => (
+                                        <div key={index} className="benefit-item">
+                                            <div className="benefit-icon">✓</div>
+                                            <div className="benefit-content">
+                                                <h4>{point.title}</h4>
+                                                <p>{point.description}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* FAQ */}
+                            <div className="info-card">
+                                <h3 className="info-title">{t.faqTitle}</h3>
+                                <div className="faq-list">
+                                    {t.faqs.map((faq, index) => (
+                                        <div key={index} className="faq-item">
+                                            <h4>{faq.question}</h4>
+                                            <p>{faq.answer}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Map Section (Placeholder) */}
+            <section className="map-section">
+                <div className="container">
+                    <div className="map-placeholder">
+                        <div className="map-content">
+                            <div className="map-icon">📍</div>
+                            <h3>Estamos en Paraguay</h3>
+                            <p>Servimos clientes en toda Latinoamérica de manera remota</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    );
 };
 
 export default ContactPage;

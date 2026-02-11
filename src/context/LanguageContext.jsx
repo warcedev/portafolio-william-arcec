@@ -1,34 +1,36 @@
-// src/context/LanguageContext.jsx
+// src/context/LanguageContext.js
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const LanguageContext = createContext();
 
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
-};
-
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
-    const savedLanguage = localStorage.getItem('codebywill-language');
-    return savedLanguage || 'es';
+    // Recuperar idioma de localStorage o usar español por defecto
+    return localStorage.getItem('language') || 'es';
   });
 
-  const toggleLanguage = (lang) => {
-    setLanguage(lang);
-    localStorage.setItem('codebywill-language', lang);
+  const toggleLanguage = () => {
+    const newLanguage = language === 'es' ? 'en' : 'es';
+    setLanguage(newLanguage);
+    localStorage.setItem('language', newLanguage);
   };
 
   useEffect(() => {
-    document.documentElement.lang = language;
+    localStorage.setItem('language', language);
   }, [language]);
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage }}>
-      {children}
-    </LanguageContext.Provider>
+      <LanguageContext.Provider value={{ language, toggleLanguage }}>
+        {children}
+      </LanguageContext.Provider>
   );
+};
+
+// Hook personalizado para usar el contexto
+export const useLanguage = () => {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error('useLanguage debe ser usado dentro de LanguageProvider');
+  }
+  return context;
 };

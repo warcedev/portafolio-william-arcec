@@ -42,3 +42,145 @@ header {
     margin-top: 2rem; /* Menor margen en móviles */
   }
 }
+/* src/App.css - Añadir al inicio */
+:root {
+  /* Paleta CodeByWill */
+  --primary-blue: #4F6BFF;
+  --deep-blue: #2F3FAF;
+  --dark-blue: #2E2A7B;
+  --violet: #7B3FE4;
+  --intense-violet: #8A4DFF;
+
+  /* Degradado principal */
+  --gradient-primary: linear-gradient(135deg, var(--primary-blue), var(--violet));
+  --gradient-dark: linear-gradient(135deg, var(--deep-blue), var(--dark-blue), var(--intense-violet));
+
+  /* Colores de soporte */
+  --light-bg: #F8F9FF;
+  --dark-bg: #0F1429;
+  --text-light: #FFFFFF;
+  --text-dark: #1A1F3C;
+  --text-gray: #6B7280;
+}
+
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  color: var(--text-dark);
+  background: var(--light-bg);
+  line-height: 1.6;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* Estilos para el botón de WhatsApp (manteniendo el tuyo pero con colores de marca) */
+.whatsapp-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #25D366;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7);
+}
+/* src/App.css */
+:root {
+  /* Paleta CodeByWill */
+  --primary-blue: #4F6BFF;
+  --deep-blue: #2F3FAF;
+  --dark-blue: #2E2A7B;
+  --violet: #7B3FE4;
+  --intense-violet: #8A4DFF;
+
+  /* Degradados */
+  --gradient-primary: linear-gradient(135deg, var(--primary-blue), var(--violet));
+  --gradient-dark: linear-gradient(135deg, var(--deep-blue), var(--dark-blue), var(--intense-violet));
+
+  /* Colores de soporte */
+  --light-bg: #F8F9FF;
+  --dark-bg: #0F1429;
+  --text-light: #FFFFFF;
+  --text-dark: #1A1F3C;
+  --text-gray: #6B7280;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--light-bg);
+  color: var(--text-dark);
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* Botón WhatsApp */
+.whatsapp-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #25D366;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7);
+}

@@ -1,1057 +1,455 @@
 // src/pages/ProcessPage.jsx
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import { motion, useAnimation, AnimatePresence } from 'framer-motion';
-import { 
-  FaSearch, 
-  FaPalette, 
-  FaCode, 
-  FaRocket,
-  FaChevronRight,
-  FaClock,
-  FaCheckCircle,
-  FaListAlt,
-  FaCalendarCheck,
-  FaUsers,
-  FaLightbulb,
-  FaCogs,
-  FaServer,
-  FaChartLine,
-  FaHandshake,
-  FaRegPaperPlane
-} from 'react-icons/fa';
+import './ProcessPage.css';
 
 const ProcessPage = () => {
   const { language } = useLanguage();
-  const [activePhase, setActivePhase] = useState('discovery');
-  const [isVisible, setIsVisible] = useState(false);
-  const controls = useAnimation();
 
-  useEffect(() => {
-    setIsVisible(true);
-    window.scrollTo(0, 0);
-    controls.start('visible');
-  }, [controls]);
-
-  const phases = {
-    discovery: {
-      title: language === 'es' ? 'Descubrimiento' : 'Discovery',
-      icon: <FaSearch />,
-      color: '#2563eb',
-      steps: [
+  const content = {
+    es: {
+      heroTitle: 'Nuestro Proceso de Trabajo',
+      heroSubtitle: 'Metodología probada para garantizar el éxito de tu proyecto',
+      methodologyTitle: 'Metodología Ágil',
+      methodologyDesc: 'Trabajamos con metodologías ágiles que nos permiten adaptarnos rápidamente a los cambios, entregar valor continuamente y mantener una comunicación transparente en cada etapa.',
+      processTitle: 'Etapas del Proceso',
+      phases: [
         {
-          title: language === 'es' ? 'Reunión Inicial' : 'Initial Meeting',
-          description: language === 'es' 
-            ? 'Analizamos tus necesidades, objetivos y expectativas para entender completamente tu proyecto.'
-            : 'We analyze your needs, objectives and expectations to fully understand your project.',
-          duration: language === 'es' ? '1-2 días' : '1-2 days',
-          icon: <FaUsers />
+          number: '01',
+          title: 'Descubrimiento & Análisis',
+          description: 'Entendemos tus necesidades, objetivos y audiencia. Analizamos el mercado y definimos el alcance del proyecto.',
+          activities: [
+            'Reunión inicial de descubrimiento',
+            'Análisis de competencia',
+            'Definición de objetivos y KPIs',
+            'Establecimiento de alcance'
+          ],
+          duration: '1-2 semanas',
+          icon: '🔍'
         },
         {
-          title: language === 'es' ? 'Análisis de Requerimientos' : 'Requirements Analysis',
-          description: language === 'es' 
-            ? 'Documentamos todas las funcionalidades, especificaciones técnicas y casos de uso.'
-            : 'We document all functionalities, technical specifications and use cases.',
-          duration: language === 'es' ? '2-3 días' : '2-3 days',
-          icon: <FaListAlt />
+          number: '02',
+          title: 'Planificación & Estrategia',
+          description: 'Creamos un plan detallado, arquitectura técnica y roadmap del proyecto. Definimos tecnologías y recursos.',
+          activities: [
+            'Wireframes y prototipos',
+            'Arquitectura técnica',
+            'Planificación de sprints',
+            'Asignación de recursos'
+          ],
+          duration: '1 semana',
+          icon: '📋'
         },
         {
-          title: language === 'es' ? 'Propuesta Detallada' : 'Detailed Proposal',
-          description: language === 'es' 
-            ? 'Creamos una propuesta completa con alcance, cronograma y presupuesto.'
-            : 'We create a complete proposal with scope, timeline and budget.',
-          duration: language === 'es' ? '1-2 días' : '1-2 days',
-          icon: <FaCalendarCheck />
+          number: '03',
+          title: 'Diseño & Desarrollo',
+          description: 'Implementamos el diseño UI/UX y desarrollamos el producto. Trabajamos en sprints con entregas parciales.',
+          activities: [
+            'Diseño de interfaz (UI)',
+            'Desarrollo frontend y backend',
+            'Pruebas de funcionalidad',
+            'Revisiones semanales'
+          ],
+          duration: '4-8 semanas',
+          icon: '💻'
+        },
+        {
+          number: '04',
+          title: 'Pruebas & Calidad',
+          description: 'Realizamos pruebas exhaustivas para garantizar calidad, rendimiento y seguridad del producto.',
+          activities: [
+            'Pruebas funcionales',
+            'Pruebas de rendimiento',
+            'Pruebas de seguridad',
+            'Pruebas de usabilidad'
+          ],
+          duration: '1-2 semanas',
+          icon: '🧪'
+        },
+        {
+          number: '05',
+          title: 'Despliegue & Lanzamiento',
+          description: 'Implementamos el proyecto en producción, realizamos monitoreo inicial y capacitación si es necesario.',
+          activities: [
+            'Despliegue en servidor',
+            'Migración de datos',
+            'Monitoreo inicial',
+            'Capacitación de usuarios'
+          ],
+          duration: '1 semana',
+          icon: '🚀'
+        },
+        {
+          number: '06',
+          title: 'Mantenimiento & Soporte',
+          description: 'Ofrecemos soporte continuo, actualizaciones y mejoras para mantener tu proyecto actualizado y funcionando perfectamente.',
+          activities: [
+            'Soporte técnico 24/7',
+            'Actualizaciones de seguridad',
+            'Mejoras continuas',
+            'Reportes mensuales'
+          ],
+          duration: 'Continuo',
+          icon: '🛡️'
         }
       ],
-      deliverables: language === 'es' 
-        ? ['Documento de requerimientos', 'Wireframes iniciales', 'Propuesta técnica', 'Cronograma estimado']
-        : ['Requirements document', 'Initial wireframes', 'Technical proposal', 'Estimated timeline']
+      technologiesTitle: 'Tecnologías que Utilizamos',
+      technologies: [
+        {
+          category: 'Frontend',
+          tools: ['React.js', 'Vue.js', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Vite']
+        },
+        {
+          category: 'Backend',
+          tools: ['Node.js', 'Python/Django', 'Express.js', 'PostgreSQL', 'MongoDB', 'Firebase']
+        },
+        {
+          category: 'DevOps & Cloud',
+          tools: ['AWS', 'Docker', 'GitHub Actions', 'Nginx', 'Linux', 'CI/CD']
+        },
+        // {
+        //   category: 'Diseño & UX',
+        //   tools: ['Figma', 'Adobe XD', 'Sketch', 'Adobe Creative Suite', 'Prototyping']
+        // }
+      ],
+      benefitsTitle: 'Beneficios de Nuestro Enfoque',
+      benefits: [
+        {
+          title: 'Transparencia Total',
+          description: 'Sabrás exactamente en qué estamos trabajando, cuánto cuesta y cuándo estará listo.',
+          icon: '👁️'
+        },
+        {
+          title: 'Comunicación Constante',
+          description: 'Reuniones semanales, reportes de progreso y canales abiertos 24/7 para preguntas.',
+          icon: '💬'
+        },
+        {
+          title: 'Flexibilidad',
+          description: 'Nos adaptamos a tus necesidades cambiantes sin comprometer la calidad o los plazos.',
+          icon: '🔄'
+        },
+        {
+          title: 'Calidad Garantizada',
+          description: 'Cada línea de código pasa por revisiones y pruebas rigurosas antes de la entrega.',
+          icon: '⭐'
+        }
+      ],
+      faqTitle: 'Preguntas Frecuentes',
+      faqs: [
+        {
+          question: '¿Cuánto tiempo toma desarrollar un proyecto web?',
+          answer: 'Varía según la complejidad. Un sitio web corporativo puede tomar 4-6 semanas, mientras que una aplicación web compleja puede requerir 2-4 meses.'
+        },
+        {
+          question: '¿Ofrecen mantenimiento después del lanzamiento?',
+          answer: 'Sí, ofrecemos planes de mantenimiento mensual que incluyen actualizaciones, soporte técnico y mejoras continuas.'
+        },
+        {
+          question: '¿Cómo manejan los cambios durante el desarrollo?',
+          answer: 'Utilizamos metodologías ágiles que permiten cambios. Los cambios menores se incorporan fácilmente, mientras que cambios mayores se evalúan y presupuestan por separado.'
+        },
+        {
+          question: '¿Trabajan con empresas internacionales?',
+          answer: '¡Absolutamente! Trabajamos con clientes en toda Latinoamérica y estamos equipados para colaborar de manera remota y eficiente.'
+        }
+      ],
+      ctaTitle: '¿Listo para comenzar?',
+      ctaSubtitle: 'Hablemos sobre tu proyecto y creemos un plan personalizado',
+      ctaButton: 'Iniciar proyecto'
     },
-    design: {
-      title: language === 'es' ? 'Diseño' : 'Design',
-      icon: <FaPalette />,
-      color: '#7c3aed',
-      steps: [
+    en: {
+      heroTitle: 'Our Work Process',
+      heroSubtitle: 'Proven methodology to ensure your project success',
+      methodologyTitle: 'Agile Methodology',
+      methodologyDesc: 'We work with agile methodologies that allow us to quickly adapt to changes, deliver value continuously, and maintain transparent communication at every stage.',
+      processTitle: 'Process Stages',
+      phases: [
         {
-          title: language === 'es' ? 'Arquitectura de Información' : 'Information Architecture',
-          description: language === 'es' 
-            ? 'Estructuramos la navegación y organización del contenido para una experiencia óptima.'
-            : 'We structure navigation and content organization for an optimal experience.',
-          duration: language === 'es' ? '3-5 días' : '3-5 days',
-          icon: <FaLightbulb />
+          number: '01',
+          title: 'Discovery & Analysis',
+          description: 'We understand your needs, goals, and audience. We analyze the market and define the project scope.',
+          activities: [
+            'Initial discovery meeting',
+            'Competitor analysis',
+            'Goal and KPI definition',
+            'Scope establishment'
+          ],
+          duration: '1-2 weeks',
+          icon: '🔍'
         },
         {
-          title: language === 'es' ? 'Diseño UX/UI' : 'UX/UI Design',
-          description: language === 'es' 
-            ? 'Creamos wireframes, prototipos y diseños visuales centrados en el usuario.'
-            : 'We create user-centered wireframes, prototypes and visual designs.',
-          duration: language === 'es' ? '5-10 días' : '5-10 days',
-          icon: <FaPalette />
+          number: '02',
+          title: 'Planning & Strategy',
+          description: 'We create a detailed plan, technical architecture, and project roadmap. We define technologies and resources.',
+          activities: [
+            'Wireframes and prototypes',
+            'Technical architecture',
+            'Sprint planning',
+            'Resource allocation'
+          ],
+          duration: '1 week',
+          icon: '📋'
         },
         {
-          title: language === 'es' ? 'Revisión y Aprobación' : 'Review & Approval',
-          description: language === 'es' 
-            ? 'Presentamos los diseños, recopilamos feedback y realizamos ajustes necesarios.'
-            : 'We present designs, collect feedback and make necessary adjustments.',
-          duration: language === 'es' ? '2-4 días' : '2-4 days',
-          icon: <FaCheckCircle />
+          number: '03',
+          title: 'Design & Development',
+          description: 'We implement UI/UX design and develop the product. We work in sprints with partial deliveries.',
+          activities: [
+            'Interface design (UI)',
+            'Frontend and backend development',
+            'Functionality testing',
+            'Weekly reviews'
+          ],
+          duration: '4-8 weeks',
+          icon: '💻'
+        },
+        {
+          number: '04',
+          title: 'Testing & Quality',
+          description: 'We conduct thorough testing to ensure product quality, performance, and security.',
+          activities: [
+            'Functional testing',
+            'Performance testing',
+            'Security testing',
+            'Usability testing'
+          ],
+          duration: '1-2 weeks',
+          icon: '🧪'
+        },
+        {
+          number: '05',
+          title: 'Deployment & Launch',
+          description: 'We implement the project in production, conduct initial monitoring, and provide training if needed.',
+          activities: [
+            'Server deployment',
+            'Data migration',
+            'Initial monitoring',
+            'User training'
+          ],
+          duration: '1 week',
+          icon: '🚀'
+        },
+        {
+          number: '06',
+          title: 'Maintenance & Support',
+          description: 'We offer continuous support, updates, and improvements to keep your project updated and running perfectly.',
+          activities: [
+            '24/7 technical support',
+            'Security updates',
+            'Continuous improvements',
+            'Monthly reports'
+          ],
+          duration: 'Ongoing',
+          icon: '🛡️'
         }
       ],
-      deliverables: language === 'es' 
-        ? ['Wireframes completos', 'Prototipos interactivos', 'Sistema de diseño', 'Guías de estilo']
-        : ['Complete wireframes', 'Interactive prototypes', 'Design system', 'Style guides']
-    },
-    development: {
-      title: language === 'es' ? 'Desarrollo' : 'Development',
-      icon: <FaCode />,
-      color: '#059669',
-      steps: [
+      technologiesTitle: 'Technologies We Use',
+      technologies: [
         {
-          title: language === 'es' ? 'Configuración del Entorno' : 'Environment Setup',
-          description: language === 'es' 
-            ? 'Preparamos el entorno de desarrollo, repositorios y herramientas necesarias.'
-            : 'We prepare the development environment, repositories and necessary tools.',
-          duration: language === 'es' ? '1-2 días' : '1-2 days',
-          icon: <FaCogs />
+          category: 'Frontend',
+          tools: ['React.js', 'Vue.js', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Vite']
         },
         {
-          title: language === 'es' ? 'Desarrollo Iterativo' : 'Iterative Development',
-          description: language === 'es' 
-            ? 'Codificamos en sprints, con entregas frecuentes y revisiones continuas.'
-            : 'We code in sprints, with frequent deliveries and continuous reviews.',
-          duration: language === 'es' ? 'Variable según proyecto' : 'Variable per project',
-          icon: <FaCode />
+          category: 'Backend',
+          tools: ['Node.js', 'Python/Django', 'Express.js', 'PostgreSQL', 'MongoDB', 'Firebase']
         },
         {
-          title: language === 'es' ? 'Integración y Testing' : 'Integration & Testing',
-          description: language === 'es' 
-            ? 'Integramos todos los módulos y realizamos pruebas exhaustivas de calidad.'
-            : 'We integrate all modules and perform comprehensive quality testing.',
-          duration: language === 'es' ? '5-15 días' : '5-15 days',
-          icon: <FaServer />
+          category: 'DevOps & Cloud',
+          tools: ['AWS', 'Docker', 'GitHub Actions', 'Nginx', 'Linux', 'CI/CD']
+        },
+        {
+          category: 'Design & UX',
+          tools: ['Figma', 'Adobe XD', 'Sketch', 'Adobe Creative Suite', 'Prototyping']
         }
       ],
-      deliverables: language === 'es' 
-        ? ['Código fuente', 'APIs documentadas', 'Pruebas unitarias', 'Entornos de staging']
-        : ['Source code', 'Documented APIs', 'Unit tests', 'Staging environments']
-    },
-    deployment: {
-      title: language === 'es' ? 'Despliegue' : 'Deployment',
-      icon: <FaRocket />,
-      color: '#ea580c',
-      steps: [
+      benefitsTitle: 'Benefits of Our Approach',
+      benefits: [
         {
-          title: language === 'es' ? 'Preparación para Producción' : 'Production Preparation',
-          description: language === 'es' 
-            ? 'Optimizamos el rendimiento, seguridad y configuramos el entorno de producción.'
-            : 'We optimize performance, security and configure the production environment.',
-          duration: language === 'es' ? '2-4 días' : '2-4 days',
-          icon: <FaChartLine />
+          title: 'Total Transparency',
+          description: 'You\'ll know exactly what we\'re working on, how much it costs, and when it will be ready.',
+          icon: '👁️'
         },
         {
-          title: language === 'es' ? 'Lanzamiento Controlado' : 'Controlled Launch',
-          description: language === 'es' 
-            ? 'Desplegamos gradualmente, monitoreando cada aspecto del sistema.'
-            : 'We deploy gradually, monitoring every aspect of the system.',
-          duration: language === 'es' ? '1-3 días' : '1-3 days',
-          icon: <FaRocket />
+          title: 'Constant Communication',
+          description: 'Weekly meetings, progress reports, and open channels 24/7 for questions.',
+          icon: '💬'
         },
         {
-          title: language === 'es' ? 'Post-Lanzamiento' : 'Post-Launch',
-          description: language === 'es' 
-            ? 'Monitoreamos, optimizamos y resolvemos cualquier incidencia post-despliegue.'
-            : 'We monitor, optimize and resolve any post-deployment issues.',
-          duration: language === 'es' ? 'Primeros 30 días' : 'First 30 days',
-          icon: <FaHandshake />
+          title: 'Flexibility',
+          description: 'We adapt to your changing needs without compromising quality or deadlines.',
+          icon: '🔄'
+        },
+        {
+          title: 'Guaranteed Quality',
+          description: 'Every line of code goes through rigorous reviews and testing before delivery.',
+          icon: '⭐'
         }
       ],
-      deliverables: language === 'es' 
-        ? ['Sistema en producción', 'Documentación técnica', 'Guías de usuario', 'Plan de mantenimiento']
-        : ['Production system', 'Technical documentation', 'User guides', 'Maintenance plan']
+      faqTitle: 'Frequently Asked Questions',
+      faqs: [
+        {
+          question: 'How long does it take to develop a web project?',
+          answer: 'It varies based on complexity. A corporate website can take 4-6 weeks, while a complex web application may require 2-4 months.'
+        },
+        {
+          question: 'Do you offer maintenance after launch?',
+          answer: 'Yes, we offer monthly maintenance plans that include updates, technical support, and continuous improvements.'
+        },
+        {
+          question: 'How do you handle changes during development?',
+          answer: 'We use agile methodologies that allow changes. Minor changes are easily incorporated, while major changes are evaluated and budgeted separately.'
+        },
+        {
+          question: 'Do you work with international companies?',
+          answer: 'Absolutely! We work with clients throughout Latin America and are equipped to collaborate remotely and efficiently.'
+        }
+      ],
+      ctaTitle: 'Ready to get started?',
+      ctaSubtitle: 'Let\'s talk about your project and create a customized plan',
+      ctaButton: 'Start project'
     }
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12
-      }
-    }
-  };
-
-  const cardHoverVariants = {
-    initial: { y: 0, scale: 1 },
-    hover: { 
-      y: -10,
-      scale: 1.02,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 15
-      }
-    }
-  };
-
-  const phaseCardHoverVariants = {
-    initial: { y: 0 },
-    hover: { 
-      y: -8,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 15
-      }
-    }
-  };
-
-  const stepHoverVariants = {
-    initial: { y: 0 },
-    hover: { 
-      y: -5,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 15
-      }
-    }
-  };
-
-  const timelineItemVariants = {
-    hidden: (direction) => ({
-      x: direction > 0 ? 100 : -100,
-      opacity: 0
-    }),
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12
-      }
-    }
-  };
-
-  const currentPhase = phases[activePhase];
+  const t = content[language];
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      style={{ 
-        minHeight: '100vh',
-        background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
-        paddingTop: '100px'
-      }}
-    >
-      <div style={{ 
-        maxWidth: '1400px', 
-        margin: '0 auto', 
-        padding: '40px 20px' 
-      }}>
-        
-        {/* Header */}
-        <motion.div
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, type: "spring" }}
-          style={{
-            textAlign: 'center',
-            marginBottom: '100px'
-          }}
-        >
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            style={{
-              fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-              fontWeight: 'bold',
-              color: '#1e293b',
-              marginBottom: '25px'
-            }}
-          >
-            <motion.span
-              style={{ color: '#2563eb' }}
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              style={{
-                display: 'inline-block',
-                background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                backgroundSize: '200% auto'
-              }}
-            >
-              {language === 'es' ? 'Nuestra' : 'Our'}
-            </motion.span>{' '}
-            {language === 'es' ? 'Metodología' : 'Methodology'}
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            style={{
-              fontSize: 'clamp(1rem, 2vw, 1.3rem)',
-              color: '#64748b',
-              maxWidth: '800px',
-              margin: '0 auto',
-              lineHeight: '1.6'
-            }}
-          >
-            {language === 'es' 
-              ? 'Un proceso estructurado y probado que garantiza calidad, transparencia y resultados excepcionales en cada proyecto.'
-              : 'A structured and proven process that ensures quality, transparency and exceptional results in every project.'}
-          </motion.p>
-          
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: '150px' }}
-            transition={{ delay: 0.6, duration: 1 }}
-            style={{
-              height: '4px',
-              background: 'linear-gradient(90deg, #2563eb, #7c3aed, #059669, #ea580c)',
-              margin: '40px auto',
-              borderRadius: '2px'
-            }}
-          />
-        </motion.div>
+      <div className="process-page">
+        {/* Hero Section */}
+        <section className="process-hero">
+          <div className="process-hero-content">
+            <h1 className="process-hero-title">{t.heroTitle}</h1>
+            <p className="process-hero-subtitle">{t.heroSubtitle}</p>
+          </div>
+        </section>
 
-        {/* Fases del Proceso */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '25px',
-            marginBottom: '80px'
-          }}
-        >
-          {Object.entries(phases).map(([key, phase], index) => (
-            <motion.button
-              key={key}
-              variants={itemVariants}
-              whileHover="hover"
-              initial="initial"
-              variants={phaseCardHoverVariants}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setActivePhase(key)}
-              style={{
-                padding: '30px 25px',
-                background: activePhase === key 
-                  ? `linear-gradient(135deg, ${phase.color} 0%, ${phase.color}dd 100%)`
-                  : 'white',
-                color: activePhase === key ? 'white' : '#475569',
-                border: `2px solid ${activePhase === key ? 'transparent' : '#e2e8f0'}`,
-                borderRadius: '20px',
-                cursor: 'pointer',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '20px',
-                textAlign: 'center',
-                boxShadow: activePhase === key 
-                  ? `0 15px 35px ${phase.color}40`
-                  : '0 10px 30px rgba(0,0,0,0.08)',
-                position: 'relative',
-                overflow: 'hidden',
-                transition: 'all 0.3s ease'
-              }}
-            >
-              {activePhase === key && (
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  style={{
-                    position: 'absolute',
-                    top: '-50px',
-                    right: '-50px',
-                    width: '100px',
-                    height: '100px',
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    borderRadius: '50%'
-                  }}
-                />
-              )}
-              
-              <motion.div
-                style={{
-                  width: '80px',
-                  height: '80px',
-                  background: activePhase === key 
-                    ? 'rgba(255, 255, 255, 0.2)'
-                    : `${phase.color}15`,
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '2rem',
-                  color: activePhase === key ? 'white' : phase.color
-                }}
-                animate={activePhase === key ? {
-                  rotate: [0, 360],
-                  scale: [1, 1.1, 1]
-                } : {}}
-                transition={activePhase === key ? {
-                  rotate: { duration: 2, repeat: Infinity, ease: "linear" },
-                  scale: { duration: 0.5 }
-                } : {}}
-              >
-                {phase.icon}
-              </motion.div>
-              
-              <div>
-                <h3 style={{
-                  fontSize: '1.4rem',
-                  fontWeight: 'bold',
-                  marginBottom: '8px'
-                }}>
-                  {phase.title}
-                </h3>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                  style={{
-                    fontSize: '0.95rem',
-                    opacity: activePhase === key ? 0.9 : 0.7
-                  }}
-                >
-                  {language === 'es' ? `${phase.steps.length} pasos` : `${phase.steps.length} steps`}
-                </motion.div>
-              </div>
-              
-              {activePhase === key && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  style={{
-                    position: 'absolute',
-                    bottom: '15px',
-                    right: '15px'
-                  }}
-                >
-                  <FaChevronRight />
-                </motion.div>
-              )}
-            </motion.button>
-          ))}
-        </motion.div>
+        {/* Methodology Section */}
+        <section className="section">
+          <div className="container">
+            <div className="methodology-intro">
+              <h2 className="section-title">{t.methodologyTitle}</h2>
+              <p className="methodology-desc">{t.methodologyDesc}</p>
+            </div>
+          </div>
+        </section>
 
-        {/* Detalles de la Fase */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activePhase}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
-            transition={{ duration: 0.5 }}
-            style={{
-              background: 'white',
-              borderRadius: '28px',
-              padding: '60px',
-              boxShadow: '0 25px 80px rgba(0,0,0,0.12)',
-              marginBottom: '80px',
-              borderLeft: `8px solid ${currentPhase.color}`,
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-          >
-            {/* Background decoration */}
-            <motion.div
-              animate={{
-                rotate: 360,
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              style={{
-                position: 'absolute',
-                top: '-100px',
-                right: '-100px',
-                width: '200px',
-                height: '200px',
-                background: `${currentPhase.color}05`,
-                borderRadius: '50%'
-              }}
-            />
-            
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '25px',
-                marginBottom: '50px'
-              }}
-            >
-              <motion.div
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
-                style={{
-                  width: '90px',
-                  height: '90px',
-                  background: `${currentPhase.color}15`,
-                  borderRadius: '25px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '2.5rem',
-                  color: currentPhase.color
-                }}
-              >
-                {currentPhase.icon}
-              </motion.div>
-              <div>
-                <h2 style={{
-                  fontSize: '2.8rem',
-                  fontWeight: 'bold',
-                  color: '#1e293b',
-                  marginBottom: '15px'
-                }}>
-                  {currentPhase.title}
-                </h2>
-                <p style={{
-                  color: '#64748b',
-                  fontSize: '1.2rem'
-                }}>
-                  {language === 'es' 
-                    ? 'Fase crítica donde establecemos las bases para el éxito del proyecto'
-                    : 'Critical phase where we establish the foundations for project success'}
-                </p>
-              </div>
-            </motion.div>
+        {/* Process Timeline */}
+        <section className="section bg-light">
+          <div className="container">
+            <div className="section-header">
+              <h2 className="section-title">{t.processTitle}</h2>
+              <div className="title-line"></div>
+            </div>
+            <div className="process-timeline">
+              {t.phases.map((phase, index) => (
+                  <div key={index} className="phase-card">
+                    <div className="phase-header">
+                      <div className="phase-number">{phase.number}</div>
+                      <div className="phase-icon">{phase.icon}</div>
+                    </div>
+                    <h3 className="phase-title">{phase.title}</h3>
+                    <p className="phase-description">{phase.description}</p>
 
-            {/* Pasos de la fase */}
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                gap: '35px',
-                marginBottom: '60px'
-              }}
-            >
-              {currentPhase.steps.map((step, index) => (
-                <motion.div
-                  key={index}
-                  custom={index}
-                  variants={itemVariants}
-                  whileHover="hover"
-                  initial="initial"
-                  variants={stepHoverVariants}
-                  style={{
-                    background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
-                    padding: '35px',
-                    borderRadius: '20px',
-                    border: `1px solid ${currentPhase.color}30`,
-                    position: 'relative',
-                    overflow: 'hidden'
-                  }}
-                >
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: index * 0.1 }}
-                    style={{
-                      position: 'absolute',
-                      top: '-20px',
-                      left: '30px',
-                      background: currentPhase.color,
-                      color: 'white',
-                      width: '50px',
-                      height: '50px',
-                      borderRadius: '50%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontWeight: 'bold',
-                      fontSize: '1.2rem',
-                      boxShadow: `0 5px 15px ${currentPhase.color}40`
-                    }}
-                  >
-                    {index + 1}
-                  </motion.div>
-                  
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '20px',
-                    marginBottom: '20px',
-                    marginTop: '15px'
-                  }}>
-                    <motion.div
-                      style={{
-                        color: currentPhase.color,
-                        fontSize: '1.8rem'
-                      }}
-                      whileHover={{ scale: 1.2 }}
-                    >
-                      {step.icon}
-                    </motion.div>
-                    <h3 style={{
-                      fontSize: '1.5rem',
-                      fontWeight: 'bold',
-                      color: '#1e293b',
-                      margin: 0
-                    }}>
-                      {step.title}
-                    </h3>
+                    <div className="phase-duration">
+                      <span className="duration-label">Duración:</span>
+                      <span className="duration-value">{phase.duration}</span>
+                    </div>
+
+                    <div className="phase-activities">
+                      <h4>Actividades:</h4>
+                      <ul className="activities-list">
+                        {phase.activities.map((activity, activityIndex) => (
+                            <li key={activityIndex} className="activity-item">
+                              <span className="activity-bullet">•</span>
+                              {activity}
+                            </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                  
-                  <p style={{
-                    color: '#475569',
-                    lineHeight: '1.6',
-                    marginBottom: '25px'
-                  }}>
-                    {step.description}
-                  </p>
-                  
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '12px',
-                      color: currentPhase.color,
-                      fontSize: '1rem',
-                      fontWeight: '600',
-                      background: `${currentPhase.color}10`,
-                      padding: '10px 20px',
-                      borderRadius: '25px',
-                      width: 'fit-content'
-                    }}
-                  >
-                    <FaClock />
-                    <span>{step.duration}</span>
-                  </motion.div>
-                </motion.div>
               ))}
-            </motion.div>
-
-            {/* Entregables */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-            >
-              <h3 style={{
-                fontSize: '1.6rem',
-                fontWeight: 'bold',
-                color: '#1e293b',
-                marginBottom: '30px'
-              }}>
-                {language === 'es' ? 'Entregables de esta fase:' : 'Deliverables for this phase:'}
-              </h3>
-              <motion.div
-                variants={containerVariants}
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '20px'
-                }}
-              >
-                {currentPhase.deliverables.map((deliverable, index) => (
-                  <motion.div
-                    key={index}
-                    custom={index}
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    style={{
-                      background: `${currentPhase.color}10`,
-                      color: currentPhase.color,
-                      padding: '15px 25px',
-                      borderRadius: '30px',
-                      fontSize: '1rem',
-                      fontWeight: '600',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '12px',
-                      backdropFilter: 'blur(10px)',
-                      border: `1px solid ${currentPhase.color}30`
-                    }}
-                  >
-                    <motion.span
-                      animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                    >
-                      <FaCheckCircle />
-                    </motion.span>
-                    <span>{deliverable}</span>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Timeline Visual */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          style={{
-            background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
-            borderRadius: '28px',
-            padding: '80px 40px',
-            color: 'white',
-            marginBottom: '100px',
-            position: 'relative',
-            overflow: 'hidden'
-          }}
-        >
-          {/* Animated background elements */}
-          <motion.div
-            animate={{
-              y: [0, -30, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            style={{
-              position: 'absolute',
-              top: '20%',
-              left: '5%',
-              width: '60px',
-              height: '60px',
-              background: 'radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%)',
-              borderRadius: '50%'
-            }}
-          />
-          
-          <motion.div
-            animate={{
-              y: [0, 30, 0],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1
-            }}
-            style={{
-              position: 'absolute',
-              bottom: '30%',
-              right: '8%',
-              width: '80px',
-              height: '80px',
-              background: 'radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%)',
-              borderRadius: '50%'
-            }}
-          />
-          
-          <div style={{ textAlign: 'center', marginBottom: '60px', position: 'relative', zIndex: 2 }}>
-            <motion.h2
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              style={{
-                fontSize: '2.8rem',
-                fontWeight: 'bold',
-                marginBottom: '20px'
-              }}
-            >
-              {language === 'es' ? 'Flujo de Trabajo Completo' : 'Complete Workflow'}
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              style={{
-                fontSize: '1.2rem',
-                color: '#cbd5e1',
-                maxWidth: '700px',
-                margin: '0 auto'
-              }}
-            >
-              {language === 'es' 
-                ? 'Desde la idea inicial hasta el lanzamiento y más allá, cada paso está cuidadosamente planificado'
-                : 'From the initial idea to launch and beyond, every step is carefully planned'}
-            </motion.p>
+            </div>
           </div>
+        </section>
 
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '50px',
-            position: 'relative',
-            zIndex: 2
-          }}>
-            {/* Animated timeline line */}
-            <motion.div
-              initial={{ height: 0 }}
-              whileInView={{ height: 'calc(100% - 100px)' }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-              style={{
-                position: 'absolute',
-                left: '55px',
-                top: '50px',
-                width: '4px',
-                background: 'linear-gradient(180deg, #2563eb, #7c3aed, #059669, #ea580c)',
-                borderRadius: '2px'
-              }}
-            />
-
-            {Object.entries(phases).map(([key, phase], index) => (
-              <motion.div
-                key={key}
-                custom={index}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={timelineItemVariants}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '35px',
-                  marginLeft: '90px'
-                }}
-              >
-                <motion.div
-                  whileHover={{ scale: 1.5 }}
-                  style={{
-                    width: '25px',
-                    height: '25px',
-                    background: phase.color,
-                    borderRadius: '50%',
-                    border: '5px solid #0f172a',
-                    position: 'absolute',
-                    left: '-60px',
-                    zIndex: 3,
-                    boxShadow: `0 0 20px ${phase.color}`
-                  }}
-                />
-                
-                <motion.div
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
-                  style={{
-                    width: '80px',
-                    height: '80px',
-                    background: `${phase.color}20`,
-                    borderRadius: '20px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '2.2rem',
-                    flexShrink: 0,
-                    color: phase.color,
-                    backdropFilter: 'blur(10px)'
-                  }}
-                >
-                  {phase.icon}
-                </motion.div>
-                
-                <div style={{ flex: 1 }}>
-                  <h3 style={{
-                    fontSize: '1.6rem',
-                    fontWeight: 'bold',
-                    marginBottom: '15px'
-                  }}>
-                    {phase.title}
-                  </h3>
-                  <p style={{
-                    color: '#cbd5e1',
-                    lineHeight: '1.6'
-                  }}>
-                    {language === 'es' 
-                      ? `${phase.steps.length} pasos estructurados que garantizan resultados óptimos`
-                      : `${phase.steps.length} structured steps that ensure optimal results`}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+        {/* Technologies Section */}
+        <section className="section">
+          <div className="container">
+            <div className="section-header">
+              <h2 className="section-title">{t.technologiesTitle}</h2>
+              <div className="title-line"></div>
+            </div>
+            <div className="technologies-grid">
+              {t.technologies.map((tech, index) => (
+                  <div key={index} className="technology-card">
+                    <h3 className="tech-category">{tech.category}</h3>
+                    <div className="tech-tools">
+                      {tech.tools.map((tool, toolIndex) => (
+                          <span key={toolIndex} className="tech-tool">
+                                            {tool}
+                                        </span>
+                      ))}
+                    </div>
+                  </div>
+              ))}
+            </div>
           </div>
-        </motion.div>
+        </section>
 
-        {/* CTA Final */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          style={{
-            background: 'white',
-            borderRadius: '28px',
-            padding: '80px 60px',
-            textAlign: 'center',
-            boxShadow: '0 25px 80px rgba(0,0,0,0.12)',
-            position: 'relative',
-            overflow: 'hidden'
-          }}
-        >
-          <motion.div
-            animate={{
-              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: 'linear-gradient(45deg, rgba(37, 99, 235, 0.02) 0%, rgba(124, 58, 237, 0.02) 50%, rgba(37, 99, 235, 0.02) 100%)',
-              backgroundSize: '200% 200%',
-              zIndex: 1
-            }}
-          />
-          
-          <div style={{ position: 'relative', zIndex: 2 }}>
-            <motion.h2
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              style={{
-                fontSize: '2.8rem',
-                fontWeight: 'bold',
-                color: '#1e293b',
-                marginBottom: '25px'
-              }}
-            >
-              {language === 'es' 
-                ? '¿Listo para comenzar tu proyecto?' 
-                : 'Ready to start your project?'}
-            </motion.h2>
-            
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              style={{
-                fontSize: '1.2rem',
-                color: '#64748b',
-                marginBottom: '50px',
-                maxWidth: '700px',
-                margin: '0 auto',
-                lineHeight: '1.6'
-              }}
-            >
-              {language === 'es' 
-                ? 'Nuestro proceso garantiza transparencia, comunicación constante y resultados de calidad en cada etapa.'
-                : 'Our process ensures transparency, constant communication and quality results at every stage.'}
-            </motion.p>
-            
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              style={{
-                display: 'flex',
-                gap: '25px',
-                justifyContent: 'center',
-                flexWrap: 'wrap'
-              }}
-            >
-              <motion.div
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Link 
-                  to="/contacto"
-                  style={{
-                    padding: '20px 50px',
-                    background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    borderRadius: '16px',
-                    textDecoration: 'none',
-                    fontSize: '1.1rem',
-                    transition: 'all 0.3s ease',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '15px',
-                    boxShadow: '0 10px 30px rgba(37, 99, 235, 0.3)'
-                  }}
-                >
-                  <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    <FaRegPaperPlane />
-                  </motion.span>
-                  {language === 'es' ? 'Iniciar Proyecto' : 'Start Project'}
-                </Link>
-              </motion.div>
-              
-              <motion.div
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Link 
-                  to="/servicios"
-                  style={{
-                    padding: '20px 50px',
-                    background: 'white',
-                    color: '#2563eb',
-                    border: '2px solid #2563eb',
-                    fontWeight: 'bold',
-                    borderRadius: '16px',
-                    textDecoration: 'none',
-                    fontSize: '1.1rem',
-                    transition: 'all 0.3s ease',
-                    display: 'inline-block',
-                    boxShadow: '0 10px 30px rgba(0,0,0,0.08)'
-                  }}
-                >
-                  {language === 'es' ? 'Ver Servicios' : 'View Services'}
-                </Link>
-              </motion.div>
-            </motion.div>
+        {/* Benefits Section */}
+        <section className="section bg-light">
+          <div className="container">
+            <div className="section-header">
+              <h2 className="section-title">{t.benefitsTitle}</h2>
+              <div className="title-line"></div>
+            </div>
+            <div className="benefits-grid">
+              {t.benefits.map((benefit, index) => (
+                  <div key={index} className="benefit-card">
+                    <div className="benefit-icon">{benefit.icon}</div>
+                    <h3>{benefit.title}</h3>
+                    <p>{benefit.description}</p>
+                  </div>
+              ))}
+            </div>
           </div>
-        </motion.div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="section">
+          <div className="container">
+            <div className="section-header">
+              <h2 className="section-title">{t.faqTitle}</h2>
+              <div className="title-line"></div>
+            </div>
+            <div className="faq-grid">
+              {t.faqs.map((faq, index) => (
+                  <div key={index} className="faq-item">
+                    <div className="faq-question">
+                      <h3>{faq.question}</h3>
+                      <span className="faq-toggle">+</span>
+                    </div>
+                    <div className="faq-answer">
+                      <p>{faq.answer}</p>
+                    </div>
+                  </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="cta-section">
+          <div className="container">
+            <h2 className="cta-title">{t.ctaTitle}</h2>
+            <p className="cta-subtitle">{t.ctaSubtitle}</p>
+            <Link to="/contacto" className="btn-cta">
+              {t.ctaButton}
+            </Link>
+          </div>
+        </section>
       </div>
-    </motion.div>
   );
 };
 
